@@ -1,16 +1,16 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import { handleCommand } from "./handle_command.js"
+import { handleCommand } from "./handle_command.js";
 
 const intents: GatewayIntentBits[] = [
-  GatewayIntentBits.Guilds,         // 前提
+  GatewayIntentBits.Guilds, // 前提
   GatewayIntentBits.MessageContent, // メッセージ内容取得
-  GatewayIntentBits.GuildMessages,  // メッセージ作成イベント
+  GatewayIntentBits.GuildMessages, // メッセージ作成イベント
 ];
 
 const client = new Client({ intents });
 
 client.once("ready", () => {
-  console.log("Ready!")
+  console.log("Ready!");
 });
 
 client.on("messageCreate", (msg) => {
@@ -18,9 +18,9 @@ client.on("messageCreate", (msg) => {
     const reply = handleCommand(msg.content);
     // コマンドが存在しない場合はnull
     if (reply !== null) {
-      msg.channel.send(reply)
+      msg.channel.send(reply);
     }
   }
-})
+});
 
 await client.login(process.env["BOT_TOKEN"]);

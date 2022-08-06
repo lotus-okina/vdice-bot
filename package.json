@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "start": "tsc && node build/index.js",
-    "lint": "prettier --write . && eslint --ext .ts"
+    "lint": "prettier --write . && eslint --ext .ts src"
   },
   "dependencies": {
     "discord.js": "^14.1.2",
@@ -17,5 +17,8 @@
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4"
+  },
+  "engines": {
+    "node": "<=16.9.0"
   }
 }
