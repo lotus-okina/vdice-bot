@@ -3,7 +3,8 @@
   "scripts": {
     "start": "tsc && node build/index.js",
     "build": "tsc",
-    "lint": "prettier --write . && eslint --ext .ts src"
+    "lint": "prettier -w . && eslint --ext .ts src --fix",
+    "lint:ci": "prettier -c . && eslint --ext .ts src --max-warnings 0"
   },
   "dependencies": {
     "discord.js": "^14.1.2",
