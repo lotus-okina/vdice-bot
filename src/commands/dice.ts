@@ -17,11 +17,8 @@ export class DiceHandler extends CommandHandler {
       return `振るダイスの指定がありません（例: \`!${name} 1d6\`）`;
     }
 
-    if (match[1] === undefined || match[2] === undefined) {
-      // ここには来ないはず
-      console.warn("Assertion failed in dice");
-      return "「だから太陽に近づくなって言ったのに」";
-    }
+    assert(match[1]);
+    assert(match[2]);
 
     const dices = parseInt(match[1]);
     const faces = parseInt(match[2]);
@@ -39,12 +36,6 @@ export class DiceHandler extends CommandHandler {
     const results = [];
     for (let i = 0; i < dices; i++) {
       results.push(rollDice(faces));
-    }
-
-    if (results.length !== dices) {
-      // ここには来ないはず
-      console.warn("Array length mismatch in dice");
-      return "「ぺこら土星にいるよ」";
     }
 
     assert(results[0]);

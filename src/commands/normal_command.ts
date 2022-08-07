@@ -18,11 +18,7 @@ export class NormalCommandHandler extends CommandHandler {
     const regex = new RegExp(`!${name}\\s*(\\d*)`);
     const match = regex.exec(postContent);
 
-    if (match === null) {
-      // コマンドの存在は確認してあるのでここには来ないはず
-      console.warn("Assertion failed in handleNormalCommand");
-      return "「早くバケツで太陽すくって」";
-    }
+    assert(match);
 
     if (match[1] !== undefined && match[1] !== "") {
       const n = parseInt(match[1]);
@@ -30,7 +26,7 @@ export class NormalCommandHandler extends CommandHandler {
         return "無";
       }
 
-      console.log(`Command ${name} ${n}.`);
+      console.log(`Command ${name} ${n}`);
 
       const l = sampleSize(list, n);
       return l.join("、");

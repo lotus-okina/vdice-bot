@@ -1,5 +1,6 @@
 import type { CommandHandler } from "./commands/types.js";
 import { DiceHandler } from "./commands/dice.js";
+import { PickHandler } from "./commands/pick.js";
 import { NormalCommandHandler } from "./commands/normal_command.js";
 import { nijiF, nijiM, hololive } from "./lists.js";
 
@@ -9,6 +10,7 @@ const commands: Record<string, CommandHandler> = {
   nijimas: new NormalCommandHandler("nijimas", nijiM),
   hololive: new NormalCommandHandler("hololive", hololive),
   dice: new DiceHandler("dice"),
+  pick: new PickHandler("pick"),
 };
 
 export function handleCommand(postContent: string): string | null {
