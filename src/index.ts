@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import { handleCommand } from "./handle_command.js";
+import { handleCommand } from "./commands.js";
 
 const intents: GatewayIntentBits[] = [
   GatewayIntentBits.Guilds, // 前提

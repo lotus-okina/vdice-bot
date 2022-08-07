@@ -1,32 +1,30 @@
-import * as dice from "./commands/dice.js";
-import { handleNormalCommand } from "./commands/normal_commands.js";
+import type { CommandHandler } from "./commands/types.js";
+import { DiceHandler } from "./commands/dice.js";
+import { NormalCommandHandler } from "./commands/normal_command.js";
 import { nijiF, nijiM, hololive } from "./lists.js";
 
-// 通常コマンド(`!hogecmd \d*`の形式のコマンド)
-export interface NormalCommand {
-  name: string;
-  list: string[];
+const commands: Record<string, CommandHandler> = {
+  nijidice: new NormalCommandHandler("nijidice", nijiF.concat(nijiM)),
+  nijifem: new NormalCommandHandler("nijifem", nijiF),
+  nijimas: new NormalCommandHandler("nijimas", nijiM),
+  hololive: new NormalCommandHandler("hololive", hololive),
+  dice: new DiceHandler("dice"),
+};
+
+export function handleCommand(postContent: string): string | null {
+  // ひとまずコマンドは英数字+"_"でできていることにする
+  // 必要になったらそのときになんとかする
+  const match = /^!(\w+)/.exec(postContent);
+
+  if (match === null || match[1] === undefined) return null;
+
+  const name = match[1];
+
+  const command = commands[name];
+  if (command !== undefined) {
+    return command.handle(postContent);
+  }
+
+  console.log(`No matching command for ${name}`);
+  return null;
 }
-
-// 特殊コマンド(通常コマンドの形式でないコマンド)
-export interface SpecialCommand {
-  name: string;
-  fn: (s: string) => string;
-}
-
-// 通常コマンド(`!hogecmd \d*`の形式のコマンド)
-// コマンド名と、選出対象のマップ
-export const normalCommandMap: NormalCommand[] = [
-  { name: "nijidice", list: nijiF.concat(nijiM) },
-  { name: "nijifem", list: nijiF },
-  { name: "nijimas", list: nijiM },
-  { name: "hololive", list: hololive },
-];
-
-// 特殊コマンド(通常コマンドの形式でないコマンド)
-// 投稿内容を全部渡して独自に処理させる
-export const specialCommandMap: SpecialCommand[] = [
-  { name: dice.name, fn: dice.handleDice },
-];
-
-export { handleNormalCommand };
