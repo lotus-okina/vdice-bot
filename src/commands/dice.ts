@@ -43,7 +43,7 @@ export function handleDice(s: string): string {
   assert(results[0]);
   let msg = results[0].toString();
   if (dices === 1) {
-    return msg
+    return msg;
   }
 
   let sum = results[0];

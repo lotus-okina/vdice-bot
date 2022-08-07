@@ -1,4 +1,5 @@
-import nijiFemList from "./lists/niji_jp_fem.js";
-import nijiMasList from "./lists/niji_jp_mas.js";
+import nijiF from "./lists/niji_jp_fem.js";
+import nijiM from "./lists/niji_jp_mas.js";
+import hololive from "./lists/hololive_jp.js";
 
-export { nijiMasList, nijiFemList };
+export { nijiM, nijiF, hololive };

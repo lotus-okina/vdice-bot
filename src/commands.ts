@@ -1,6 +1,6 @@
 import * as dice from "./commands/dice.js";
 import { handleNormalCommand } from "./commands/normal_commands.js";
-import { nijiFemList, nijiMasList } from "./lists.js";
+import { nijiF, nijiM, hololive } from "./lists.js";
 
 // 通常コマンド(`!hogecmd \d*`の形式のコマンド)
 export interface NormalCommand {
@@ -17,9 +17,10 @@ export interface SpecialCommand {
 // 通常コマンド(`!hogecmd \d*`の形式のコマンド)
 // コマンド名と、選出対象のマップ
 export const normalCommandMap: NormalCommand[] = [
-  { name: "nijidice", list: nijiFemList.concat(nijiMasList) },
-  { name: "nijifem", list: nijiFemList },
-  { name: "nijimas", list: nijiMasList },
+  { name: "nijidice", list: nijiF.concat(nijiM) },
+  { name: "nijifem", list: nijiF },
+  { name: "nijimas", list: nijiM },
+  { name: "hololive", list: hololive },
 ];
 
 // 特殊コマンド(通常コマンドの形式でないコマンド)
