@@ -13,12 +13,12 @@ client.once("ready", () => {
   console.log("Ready!");
 });
 
-client.on("messageCreate", (msg) => {
+client.on("messageCreate", async (msg) => {
   if (!msg.author.bot && msg.content.startsWith("!")) {
     const reply = handleCommand(msg.content);
     // コマンドが存在しない場合はnull
     if (reply !== null) {
-      msg.channel.send(reply);
+      await msg.channel.send(reply);
     }
   }
 });
