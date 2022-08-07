@@ -41,9 +41,13 @@ export function handleDice(s: string): string {
   }
 
   assert(results[0]);
-  let sum = 0;
   let msg = results[0].toString();
-  for (let i = 0; i < dices; i++) {
+  if (dices === 1) {
+    return msg
+  }
+
+  let sum = results[0];
+  for (let i = 1; i < dices; i++) {
     const res = results[i];
     assert(res);
     sum += res;
