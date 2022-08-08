@@ -1,5 +1,6 @@
 import assert from "assert";
 import { CommandHandler } from "./types.js";
+import { rollDice } from "../utils.js";
 
 export class DiceHandler extends CommandHandler {
   static readonly maxDices = 50;
@@ -56,9 +57,4 @@ export class DiceHandler extends CommandHandler {
 
     return msg;
   }
-}
-
-function rollDice(faces: number): number {
-  assert(faces > 0);
-  return Math.trunc(Math.random() * faces) + 1;
 }

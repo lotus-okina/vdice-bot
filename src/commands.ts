@@ -1,17 +1,17 @@
-import type { CommandHandler } from "./commands/types.js";
 import { DiceHandler } from "./commands/dice.js";
 import { PickHandler } from "./commands/pick.js";
 import { NormalCommandHandler } from "./commands/normal_command.js";
-import { nijiF, nijiM, hololive } from "./lists.js";
+import { keywords } from "./lists.js";
+import { isKeyOf } from "./utils.js";
 
-const commands: Record<string, CommandHandler> = {
-  nijidice: new NormalCommandHandler("nijidice", nijiF.concat(nijiM)),
-  nijifem: new NormalCommandHandler("nijifem", nijiF),
-  nijimas: new NormalCommandHandler("nijimas", nijiM),
-  hololive: new NormalCommandHandler("hololive", hololive),
+const commands = {
+  nijidice: new NormalCommandHandler("nijidice", keywords.Niji),
+  nijifem: new NormalCommandHandler("nijifem", keywords.NijiFem),
+  nijimas: new NormalCommandHandler("nijimas", keywords.NijiMas),
+  hololive: new NormalCommandHandler("hololive", keywords.Holo),
   dice: new DiceHandler("dice"),
   pick: new PickHandler("pick"),
-};
+} as const;
 
 export function handleCommand(postContent: string): string | null {
   // ひとまずコマンドは英数字+"_"でできていることにする
@@ -22,9 +22,8 @@ export function handleCommand(postContent: string): string | null {
 
   const name = match[1];
 
-  const command = commands[name];
-  if (command !== undefined) {
-    return command.handle(postContent);
+  if (isKeyOf(commands, name)) {
+    return commands[name].handle(postContent);
   }
 
   console.log(`No matching command for ${name}`);

@@ -1,5 +1,5 @@
 // にじさんじ日本女性組
-const list = [
+export const nijiFem = [
   "月ノ美兎",
   "勇気ちひろ",
   "える",
@@ -75,5 +75,3 @@ const list = [
   "海妹四葉",
   "壱百満天原サロメ",
 ];
-
-export default list;

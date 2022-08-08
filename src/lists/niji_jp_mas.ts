@@ -1,5 +1,5 @@
 // にじさんじ日本男性組
-const list = [
+export const nijiMas = [
   "渋谷ハジメ",
   "鈴谷アキ",
   "伏見ガク",
@@ -39,5 +39,3 @@ const list = [
   "四季凪アキラ",
   "セラフ・ダズルガーデン",
 ];
-
-export default list;

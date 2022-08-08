@@ -1,5 +1,5 @@
 // ホロライブ日本
-const list = [
+export const hololive = [
   // 0期生
   "ときのそら",
   "ロボ子さん",
@@ -47,5 +47,3 @@ const list = [
   "えーちゃん",
   "春先のどか",
 ];
-
-export default list;
