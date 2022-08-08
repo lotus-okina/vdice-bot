@@ -1,6 +1,6 @@
 import assert from "assert";
-import sampleSize from "lodash/sampleSize.js";
 import { CommandHandler } from "./types.js";
+import { select } from "../utils.js";
 
 // 通常コマンド(`!hogecmd \d*`の形式のコマンド)
 export class NormalCommandHandler extends CommandHandler {
@@ -19,24 +19,16 @@ export class NormalCommandHandler extends CommandHandler {
     const match = regex.exec(postContent);
 
     assert(match);
+    assert(match[1] !== undefined);
 
-    if (match[1] !== undefined && match[1] !== "") {
-      const n = parseInt(match[1]);
-      if (n <= 0) {
-        return "無";
-      }
-
-      console.log(`Command ${name} ${n}`);
-
-      const l = sampleSize(list, n);
-      return l.join("、");
-    } else {
-      // 数字が見つからない場合は1人だけ選ぶ
+    if (match[1] === "") {
+      // 数字がない場合は1人だけ選ぶ
       console.log(`Command ${name}`);
-
-      const l = sampleSize(list, 1);
-      assert(l[0]);
-      return l[0];
+      return select(list, 1);
+    } else {
+      const n = parseInt(match[1]);
+      console.log(`Command ${name} ${n}`);
+      return select(list, n);
     }
   }
 }

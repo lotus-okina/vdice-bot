@@ -25,14 +25,14 @@ export class DiceHandler extends CommandHandler {
     const faces = parseInt(match[2]);
 
     if (dices <= 0 || faces <= 0) {
-      return "ダイスが無です";
+      return "無";
     }
 
     if (dices > maxDices || faces > maxFaces) {
-      return `**デッッッッッッカ！！！**\n（ダイスの数は${maxDices}まで、面の数は${maxFaces}までです）`;
+      return `**デッッッッッッッッッカ！！！**\n（ダイスの数は${maxDices}まで、面の数は${maxFaces}までです）`;
     }
 
-    console.log(`Run ${name} ${dices}d${faces}`);
+    console.log(`Command ${name} ${dices}d${faces}`);
 
     const results = [];
     for (let i = 0; i < dices; i++) {
@@ -45,15 +45,16 @@ export class DiceHandler extends CommandHandler {
       return msg;
     }
 
+    // ダイスが複数個の場合は各々の結果と総和を出す
     let sum = results[0];
     for (let i = 1; i < dices; i++) {
       const res = results[i];
       assert(res);
       sum += res;
-      msg += " + " + res.toString();
+      msg += ` + ${res.toString()}`;
     }
 
-    msg += " = " + sum.toString();
+    msg += ` = **${sum.toString()}**`;
 
     return msg;
   }

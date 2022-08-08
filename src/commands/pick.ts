@@ -1,6 +1,7 @@
 import assert from "assert";
-import sampleSize from "lodash/sampleSize.js";
 import { CommandHandler } from "./types.js";
+import { keywords } from "../lists.js";
+import { select, keysOf } from "../utils.js";
 
 export class PickHandler extends CommandHandler {
   handle(postContent: string) {
@@ -17,9 +18,15 @@ export class PickHandler extends CommandHandler {
     assert(match[2] !== undefined);
 
     const items = match[2]
-      .split("、")
+      .split(/,|、/)
       .map((s) => s.trim())
       .filter((s) => s !== "");
+
+    // キーワードを展開する
+    // キーワード同士で内容に被りがあるかもしれないのでユニーク処理をかける
+    const itemsExpanded = Array.from(
+      new Set(items.map((s) => expandKeyword(s)).flat())
+    );
 
     if (items.length <= 0) {
       return "無";
@@ -27,19 +34,21 @@ export class PickHandler extends CommandHandler {
 
     if (match[1] === "") {
       console.log(`Command ${name} [${items.join("、")}]`);
-      const l = sampleSize(items, 1);
-      assert(l[0]);
-      return l[0];
+      return select(itemsExpanded, 1);
     } else {
       const n = parseInt(match[1]);
-      if (n <= 0) {
-        return "無";
-      }
-
-      console.log(`Command ${name} ${n} [${items.join("、")}}]`);
-
-      const l = sampleSize(items, n);
-      return l.join("、");
+      console.log(`Command ${name} ${n} [${items.join("、")}]`);
+      return select(itemsExpanded, n);
     }
   }
+}
+
+function expandKeyword(s: string) {
+  const keyArray = keysOf(keywords);
+  for (const key of keyArray) {
+    if (key.toLowerCase() === s.toLowerCase()) {
+      return keywords[key];
+    }
+  }
+  return s;
 }
