@@ -15,7 +15,7 @@ export class DiceHandler extends CommandHandler {
     const match = regex.exec(postContent);
 
     if (match === null) {
-      return `振るダイスの指定がありません（例: \`!${name} 1d6\`）`;
+      return `ダイスの指定が不正です（正しい例: \`!${name} 1d6\`）`;
     }
 
     assert(match[1]);

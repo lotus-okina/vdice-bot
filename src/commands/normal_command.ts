@@ -14,21 +14,21 @@ export class NormalCommandHandler extends CommandHandler {
     const name = this.name;
     const list = this.list;
 
-    // コマンドに続く数値部分を取り出す
-    const regex = new RegExp(`!${name}\\s*(\\d*)`);
-    const match = regex.exec(postContent);
+    // 選出数指定がある場合
+    const regexWithNum = new RegExp(`!${name}\\s+(\\d+)(?:$|\\s+)`);
+    const matchWithNum = regexWithNum.exec(postContent);
 
-    assert(match);
-    assert(match[1] !== undefined);
-
-    if (match[1] === "") {
-      // 数字がない場合は1人だけ選ぶ
-      console.log(`Command ${name}`);
-      return select(list, 1);
-    } else {
-      const n = parseInt(match[1]);
+    if (matchWithNum !== null) {
+      assert(matchWithNum[1] !== undefined);
+      const n = parseInt(matchWithNum[1]);
       console.log(`Command ${name} ${n}`);
       return select(list, n);
     }
+
+    // 選出数指定がない場合
+    // コマンドが正しく指定されていることは上位関数で
+    // チェック済みなので、選出数1として実行する
+    console.log(`Command ${name}`);
+    return select(list, 1);
   }
 }

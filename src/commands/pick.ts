@@ -7,11 +7,12 @@ export class PickHandler extends CommandHandler {
   handle(postContent: string) {
     const name = this.name;
 
-    const regex = new RegExp(`!${name}\\s*(\\d*)\\s*\\[([^\\]]*)\\]`);
+    // !pick (数値?) (任意のコメント)[<選択肢>]
+    const regex = new RegExp(`!${name}\\s*(\\d*)\\s+.*\\[([^\\]]*)\\]`);
     const match = regex.exec(postContent);
 
     if (match === null) {
-      return `指定が正しくありません（例: \`!${name} [ドラ友、ドラ友じゃない]\`）`;
+      return `指定が正しくありません（正しい例: \`!${name} [ドラ友、ドラ友じゃない]\`）`;
     }
 
     assert(match[1] !== undefined);
