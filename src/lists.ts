@@ -24,7 +24,7 @@ import {
   holostars,
   holoEnOthers,
 } from "./lists/holo_other.js";
-import { dotLive, vspo } from "./lists/other.js";
+import { dotLive, vspo, aogiri } from "./lists/other.js";
 
 export const keywords = {
   // にじさんじ
@@ -64,4 +64,5 @@ export const keywords = {
   // その他
   DotLive: dotLive,
   Vspo: vspo,
+  Aogiri: aogiri,
 } as const;
