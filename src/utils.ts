@@ -6,7 +6,7 @@ export function isKeyOf<T>(obj: T, key: PropertyKey): key is keyof T {
 }
 
 // https://stackoverflow.com/a/70974124
-export function keysOf<T>(object: T) {
+export function keysOf<T extends Record<string, unknown>>(object: T) {
   return Object.keys(object) as (keyof T)[];
 }
 
