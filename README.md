@@ -65,10 +65,26 @@ Bot をサーバに招待すると、全ての新着メッセージを監視し�
 
 ### 前提ツール
 
-- `node`: v16.9.0 以上
+- `direnv`
+- `volta`
+- `pm2`
+
+### 前提ツールインストール
+
+- `direnv`: パッケージマネージャでインストール
+- `volta`: <https://docs.volta.sh/guide/getting-started>を参照
+- `pm2`: `$ volta install pm2`でインストールし、`$ pm2 startup`で systemd サービスを登録しておく
 
 ### 実行方法
 
-1. `npm install`
-2. 環境変数`BOT_TOKEN`を設定
-3. `npm start`
+1. `direnv`をパッケージマネージャでインストール
+1. `.env`を作成し、環境変数`BOT_TOKEN`を設定 (`.env.sample`を参照)
+1. `$ direnv allow`で direnv を有効化
+1. `$ npm install`で依存関係をインストール
+1. `$ ./start.sh`を実行すると pm2 のプロセスが走り出す
+1. `$ pm2 save`で再起動に備えておく
+
+### 開発時
+
+- `$ npm run dev`で Bot を稼働できる。
+- `$ npm run lint`でリンター・フォーマッタが動く
