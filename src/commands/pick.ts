@@ -26,7 +26,7 @@ export class PickHandler extends CommandHandler {
     // キーワードを展開する
     // キーワード同士で内容に被りがあるかもしれないのでユニーク処理をかける
     const itemsExpanded = Array.from(
-      new Set(items.map((s) => expandKeyword(s)).flat())
+      new Set(items.map((s) => expandKeyword(s)).flat()),
     );
 
     if (items.length <= 0) {

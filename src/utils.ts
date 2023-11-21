@@ -1,7 +1,10 @@
 import sampleSize from "lodash/sampleSize.js";
 import assert from "assert";
 // https://stackoverflow.com/a/58962072
-export function isKeyOf<T>(obj: T, key: PropertyKey): key is keyof T {
+export function isKeyOf<T extends object>(
+  obj: T,
+  key: PropertyKey,
+): key is keyof T {
   return key in obj;
 }
 
