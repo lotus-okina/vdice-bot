@@ -1,2 +1,2 @@
 #!/bin/sh
-nohup npm start
+nohup npm start &
