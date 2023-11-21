@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import { handleCommand } from "./commands.js";
+import "dotenv/config";
 
 const intents: GatewayIntentBits[] = [
   GatewayIntentBits.Guilds, // 前提
